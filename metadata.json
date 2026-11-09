@@ -1,0 +1,6 @@
+{
+  "name": "Arooj Star Forever Paint",
+  "description": "Premium Pakistani paint manufacturer & dealer gallery featuring interior emulsions, weather shields, enamels, primers, and wood lacquers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
