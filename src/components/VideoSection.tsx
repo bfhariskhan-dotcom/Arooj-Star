@@ -42,22 +42,19 @@ export const VideoSection: React.FC = () => {
   };
 
   return (
-    <section id="videos" className="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <section id="videos" className="py-12 sm:py-16 bg-slate-950 text-white relative overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-2">
-              <Film className="w-4 h-4" />
-              <span>Factory & Durability Footage</span>
-              <span aria-hidden="true" className="text-slate-600">·</span>
-              <span className="text-slate-400">Live Demonstrations</span>
+            <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-1.5">
+              Factory & Live Demonstrations
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight font-heading">
               Watch Arooj Star in Action
             </h2>
-            <p className="text-sm text-slate-400 mt-2 leading-relaxed">
-              Experience the automated high-speed packaging line and live wall film testing proving washability, film elasticity, and durability.
+            <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed font-normal">
+              Automated high-speed plant packaging and live wall scrub resistance testing.
             </p>
           </div>
 

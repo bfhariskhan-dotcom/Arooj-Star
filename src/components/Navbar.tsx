@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ShoppingBag, Menu, X, ChevronDown, Layers, Calculator, Palette, Users, Phone, Star, Film } from 'lucide-react';
+import { FileText, Menu, X, ChevronDown, Layers, Calculator, Palette, Users, Phone, Star, Film } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6 h-20">
+        <div className="flex items-center justify-between gap-6 h-16 sm:h-18">
           {/* Brand Name - Text Only (No logo icon) */}
           <button
             onClick={() => handleSelectNav('hero')}
@@ -189,17 +189,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </nav>
 
-          {/* Action Zone: Cart Button (No phone in header as requested) */}
+          {/* Action Zone: Quotation Button */}
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={onOpenCart}
-              className="relative inline-flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-white bg-[#c1121f] hover:bg-[#a50f1b] rounded-lg shadow-sm transition-all whitespace-nowrap active:scale-95 cursor-pointer"
-              aria-label={`View Cart with ${cartCount} items`}
+              className="relative inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-bold text-white bg-[#c1121f] hover:bg-[#a50f1b] rounded-lg shadow-sm transition-all whitespace-nowrap active:scale-95 cursor-pointer"
+              aria-label={`View Quotations with ${cartCount} items`}
             >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Cart / Quotation</span>
+              <FileText className="w-4 h-4" />
+              <span>Quotation</span>
               {cartCount > 0 && (
-                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1 text-[11px] font-black text-[#c1121f] bg-white rounded-full tabular-nums shadow-xs">
+                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1.5 text-[11px] font-black text-[#c1121f] bg-white rounded-full tabular-nums shadow-xs">
                   {cartCount}
                 </span>
               )}

@@ -10,7 +10,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   light = false 
 }) => {
   return (
-    <div className={`flex items-baseline gap-1.5 select-none leading-none ${className}`}>
+    <div className={`flex items-baseline gap-1.5 select-none leading-none font-heading ${className}`}>
       <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#c1121f]">
         Arooj
       </span>

@@ -66,24 +66,24 @@ export const PaintCalculator: React.FC<PaintCalculatorProps> = ({
   };
 
   return (
-    <section id="calculator" className="py-24 bg-white border-t border-slate-200">
+    <section id="calculator" className="py-12 sm:py-16 bg-white border-t border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-2xl mb-12">
-          <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-2">
-            Professional Architectural Estimator
+        <div className="max-w-2xl mb-6 sm:mb-8">
+          <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-1.5">
+            Coverage & Cost Estimator
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight font-heading">
             Paint Coverage Calculator
           </h2>
-          <p className="text-sm text-slate-600 mt-2">
-            Calculate exact Gallons, Drummies, and dealer costs based on certified Arooj Star spreading capacities.
+          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            Calculate exact Gallons, Drummies, and dealer estimates based on certified spreading rates.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Inputs Section */}
-          <div className="lg:col-span-7 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200">
+          <div className="lg:col-span-7 bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200">
             {/* Quick Presets */}
             <div className="flex flex-wrap items-center justify-between gap-2 mb-6 pb-5 border-b border-slate-200">
               <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
@@ -315,7 +315,7 @@ export const PaintCalculator: React.FC<PaintCalculatorProps> = ({
                 onClick={handleAddBundle}
                 className="w-full py-3.5 px-4 rounded-xl font-bold text-xs text-white bg-[#c1121f] hover:bg-[#a50f1b] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-98"
               >
-                <span>Add {gallonsNeeded} Gallon(s) to Cart</span>
+                <span>Add {gallonsNeeded} Gallon(s) to Quotation</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

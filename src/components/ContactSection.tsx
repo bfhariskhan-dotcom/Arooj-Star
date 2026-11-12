@@ -31,21 +31,21 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white border-t border-slate-200">
+    <section id="contact" className="py-12 sm:py-16 bg-white border-t border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mb-16">
-          <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-2">
+        <div className="max-w-2xl mb-6 sm:mb-8">
+          <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-1.5">
             Nationwide Dealership & Orders
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight font-heading">
             Contact Us & Order Direct
           </h2>
-          <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-            Supplying all of Pakistan. Reach Malik Kabeer Shahid (CEO) and Shahid Malik Badshah directly for immediate freight quotes and bulk orders.
+          <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-normal">
+            Direct plant freight quotes and bulk orders across all of Pakistan.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Direct Hotline Cards */}
           <div className="lg:col-span-5 space-y-5">
             {/* CEO Contact Card */}

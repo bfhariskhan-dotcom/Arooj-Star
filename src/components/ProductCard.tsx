@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Eye, MessageSquare, Check } from 'lucide-react';
+import { FileText, Eye, MessageSquare, Check } from 'lucide-react';
 import { Product, PackSizeKey } from '../types';
 import { PACK_SIZE_LABELS, COMPANY_DETAILS } from '../data/products';
 
@@ -46,10 +46,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div
       onClick={() => onSelectProduct(product)}
-      className="group relative flex flex-col bg-white rounded-2xl border border-slate-200 hover:border-red-400 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+      className="group relative flex flex-col bg-white rounded-2xl border border-slate-200 hover:border-[#c1121f] hover:shadow-xl hover:shadow-red-950/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
     >
       {/* Signature Technical Badge Showcase Area (as requested by user) */}
-      <div className={`relative aspect-[16/10] overflow-hidden flex flex-col items-center justify-center p-6 text-center select-none ${
+      <div className={`relative aspect-[16/10] overflow-hidden flex flex-col items-center justify-center p-5 text-center select-none ${
         isWB
           ? 'bg-gradient-to-br from-slate-950 via-zinc-900 to-black text-white'
           : isOB
@@ -72,23 +72,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="absolute top-3 right-3">
-          <span className="text-[10px] font-semibold bg-white/10 backdrop-blur-md text-slate-200 px-2.5 py-0.5 rounded-md border border-white/10">
+          <span className="text-[10px] font-semibold bg-white/10 backdrop-blur-md text-slate-200 px-2 py-0.5 rounded-md border border-white/10">
             {product.finish}
           </span>
         </div>
 
         {/* Center Iconic Chemical Base Monogram Badge (WB / OB / VR) */}
         <div className="relative z-10 flex flex-col items-center">
-          <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:border-red-400 transition-all duration-300">
-            <span className="text-2xl font-black tracking-wider text-white">
+          <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:border-red-400 group-hover:shadow-red-500/20 transition-all duration-300">
+            <span className="text-xl font-black tracking-wider text-white">
               {product.baseCategoryCode}
             </span>
           </div>
 
-          <span className="text-xs font-bold tracking-widest uppercase text-red-300 mt-2.5">
+          <span className="text-[11px] font-bold tracking-widest uppercase text-red-300 mt-2">
             Arooj Star
           </span>
-          <span className="text-[11px] text-slate-300 font-medium">
+          <span className="text-[10px] text-slate-300 font-medium">
             {product.baseType}
           </span>
         </div>
@@ -109,23 +109,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
       </div>
 
-      {/* Content Body with Spacious Layout */}
-      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+      {/* Content Body with Crisp Layout */}
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Metadata line */}
-          <div className="flex items-center gap-2 text-xs text-slate-400 font-medium mb-2">
+          <div className="flex items-center gap-2 text-xs text-slate-400 font-medium mb-1.5">
             <span className="text-[#c1121f] font-bold">{product.brand}</span>
             <span aria-hidden="true">·</span>
             <span>{product.categoryLabel}</span>
           </div>
 
           {/* Product Name */}
-          <h3 className="text-base font-bold text-slate-900 group-hover:text-[#c1121f] transition-colors line-clamp-1 mb-2">
+          <h3 className="text-base font-bold text-slate-900 group-hover:text-[#c1121f] transition-colors line-clamp-1 mb-1.5 font-heading">
             {product.name}
           </h3>
 
           {/* Short description */}
-          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-5">
+          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3.5 font-normal">
             {product.shortDesc}
           </p>
 
@@ -194,11 +194,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <button
               type="button"
               onClick={handleAdd}
-              className={`px-4 py-2.5 text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-2.5 text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                 addedNotice
                   ? 'bg-slate-900 text-white'
                   : 'bg-[#c1121f] hover:bg-[#a50f1b] text-white active:scale-95'
               }`}
+              title="Add to Dealer Quotation"
             >
               {addedNotice ? (
                 <>
@@ -207,8 +208,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </>
               ) : (
                 <>
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>Add</span>
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>+ Quotation</span>
                 </>
               )}
             </button>

@@ -24,43 +24,43 @@ export const TestimonialsSection: React.FC = () => {
   const activeTestimonial = TESTIMONIALS[currentIndex];
 
   return (
-    <section id="testimonials" className="py-24 bg-slate-50 border-t border-slate-200">
+    <section id="testimonials" className="py-12 sm:py-16 bg-slate-50 border-t border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div className="max-w-2xl">
-            <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-2">
-              Verified Dealer & Contractor Feedback
+            <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-1.5">
+              Verified Dealer Feedback
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight font-heading">
               Trusted Across Pakistan
             </h2>
           </div>
 
           {/* Slider Navigation Controls (Arrows & Count) */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold text-slate-500 mr-2">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs font-mono font-bold text-slate-500 mr-1.5">
               {currentIndex + 1} / {TESTIMONIALS.length}
             </span>
             <button
               onClick={prevSlide}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-800 hover:text-[#c1121f] hover:border-[#c1121f] transition-all flex items-center justify-center shadow-xs cursor-pointer active:scale-95"
+              className="w-9 h-9 rounded-xl bg-white border border-slate-200 text-slate-800 hover:text-[#c1121f] hover:border-[#c1121f] hover:shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-800 hover:text-[#c1121f] hover:border-[#c1121f] transition-all flex items-center justify-center shadow-xs cursor-pointer active:scale-95"
+              className="w-9 h-9 rounded-xl bg-white border border-slate-200 text-slate-800 hover:text-[#c1121f] hover:border-[#c1121f] hover:shadow-sm transition-all flex items-center justify-center cursor-pointer active:scale-95"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Featured Testimonial Slide Card */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm relative overflow-hidden transition-all duration-300">
+        {/* Featured Testimonial Slide Card with subtle hover glow */}
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 hover:border-[#c1121f]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden">
           <div className="max-w-3xl">
             {/* 5 Red Stars */}
             <div className="flex items-center gap-1.5 mb-6">

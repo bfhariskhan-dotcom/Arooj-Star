@@ -39,22 +39,19 @@ export const ColorVisualizer: React.FC<ColorVisualizerProps> = ({ onSelectProduc
   const matchedProduct = PRODUCTS.find((p) => p.code === currentScene.recommendedProductCode);
 
   return (
-    <section id="color-studio" className="py-20 bg-slate-100 border-y border-slate-200">
+    <section id="color-studio" className="py-12 sm:py-16 bg-slate-100 border-y border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#c1121f] uppercase tracking-wider mb-2">
-              <Palette className="w-4 h-4" />
-              <span>Interactive Color Studio</span>
-              <span aria-hidden="true">·</span>
-              <span className="text-slate-500">Live Surface Simulator</span>
+            <div className="text-xs font-bold text-[#c1121f] uppercase tracking-wider mb-1.5">
+              Color Studio & Simulator
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight font-heading">
               Visualize Arooj Star Architectural Tones
             </h2>
-            <p className="text-sm text-slate-600 mt-2 max-w-2xl">
-              Preview how our high-opacity pigments behave in natural daylit living rooms, exterior facades, and polished woodwork.
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl font-normal">
+              Preview our high-opacity pigments across luxury interior rooms, exterior villa facades, and woodwork.
             </p>
           </div>
 

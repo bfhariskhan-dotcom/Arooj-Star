@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Trash2, ShoppingBag, MessageSquare, Check, ArrowRight, Printer, Building2, MapPin, Phone } from 'lucide-react';
+import { X, Trash2, FileText, MessageSquare, Check, ArrowRight, Printer, Building2, MapPin, Phone } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CartItem, DealerOrderForm } from '../types';
 import { PACK_SIZE_LABELS, COMPANY_DETAILS } from '../data/products';
@@ -105,13 +105,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           {/* Header */}
           <div className="px-6 py-5 bg-[#c1121f] text-white flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <ShoppingBag className="w-5 h-5" />
+              <FileText className="w-5 h-5" />
               <div>
                 <h3 className="text-base font-bold text-white">
-                  Dealer Quotation & Cart
+                  Dealer Quotation Request
                 </h3>
                 <span className="text-xs text-red-100">
-                  {items.length} {items.length === 1 ? 'item' : 'items'} in order list
+                  {items.length} {items.length === 1 ? 'item' : 'items'} in quotation list
                 </span>
               </div>
             </div>
@@ -119,13 +119,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <button
               onClick={onClose}
               className="p-1.5 text-white/80 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Close cart drawer"
+              aria-label="Close quotation drawer"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Navigation Tabs (Cart vs Dealer Form) */}
+          {/* Navigation Tabs (Quotation Items vs Dealer Form) */}
           {items.length > 0 && activeTab !== 'success' && (
             <div className="flex border-b border-slate-200 bg-slate-50 text-xs font-semibold">
               <button
@@ -137,7 +137,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     : 'border-transparent text-slate-500 hover:text-slate-800'
                 }`}
               >
-                1. Review Items
+                1. Quotation Items
               </button>
               <button
                 type="button"
@@ -158,9 +158,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             {items.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center text-slate-500 py-12">
                 <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-4">
-                  <ShoppingBag className="w-8 h-8" />
+                  <FileText className="w-8 h-8" />
                 </div>
-                <h4 className="text-base font-bold text-slate-800 mb-1">Your Quotation is Empty</h4>
+                <h4 className="text-base font-bold text-slate-800 mb-1">Your Quotation List is Empty</h4>
                 <p className="text-xs text-slate-500 max-w-xs mb-6">
                   Select interior emulsions, weather shields, enamels, or wood coatings from the dealer catalog.
                 </p>

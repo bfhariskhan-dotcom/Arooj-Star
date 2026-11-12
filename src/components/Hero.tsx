@@ -16,7 +16,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
   ];
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-slate-900 text-white">
+    <section id="hero" className="relative overflow-hidden bg-slate-900 text-white w-full max-w-full">
       {/* Background Hero Image with light, soft scrim */}
       <div className="absolute inset-0 z-0">
         <img
@@ -30,23 +30,23 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
       </div>
 
       {/* Clean, Minimalist Content: 1 Heading, 1 Description, 1 Button */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-36 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
         <div className="max-w-2xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08] mb-6 text-balance">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.1] mb-4 text-balance font-heading">
             Superior Quality Paints for{' '}
             <span className="text-[#c1121f]">
               Beautiful Homes
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-200 mb-10 leading-relaxed font-normal">
-            Certified architectural paints, weather shields, washable emulsions, and timberlac finishes for builders, dealers, and homes across Pakistan.
+          <p className="text-sm sm:text-base text-slate-200 mb-6 leading-relaxed font-normal">
+            Certified architectural coatings, weather shields, washable emulsions, and timberlac finishes across Pakistan.
           </p>
 
           <div>
             <button
               onClick={onExploreCatalog}
-              className="px-8 py-4 text-sm font-bold text-white bg-[#c1121f] hover:bg-[#a50f1b] rounded-xl shadow-lg hover:shadow-red-900/40 transition-all inline-flex items-center gap-3 cursor-pointer active:scale-95"
+              className="px-6 py-3.5 text-xs font-bold text-white bg-[#c1121f] hover:bg-[#a50f1b] rounded-xl shadow-lg hover:shadow-red-900/40 transition-all inline-flex items-center gap-2.5 cursor-pointer active:scale-95"
             >
               <span>Explore 48+ Products</span>
               <ArrowRight className="w-4 h-4" />
@@ -56,7 +56,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog }) => {
       </div>
 
       {/* Auto-scrolling Marquee Ticker Strip below banner */}
-      <div className="relative z-10 border-t border-white/15 bg-slate-950/85 backdrop-blur-md overflow-hidden py-4 select-none">
+      <div className="relative z-10 border-t border-white/15 bg-slate-950/85 backdrop-blur-md overflow-hidden py-4 select-none w-full max-w-full">
         <div className="animate-marquee whitespace-nowrap flex items-center gap-10">
           {[...tickerItems, ...tickerItems, ...tickerItems].map((item, idx) => (
             <div key={idx} className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-slate-200 shrink-0">

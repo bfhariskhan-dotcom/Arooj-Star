@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, ShoppingBag, MessageSquare, Shield, Clock, Maximize2, Droplets, Sparkles } from 'lucide-react';
+import { X, Check, FileText, MessageSquare, Shield, Clock, Maximize2, Droplets } from 'lucide-react';
 import { Product, PackSizeKey } from '../types';
 import { PACK_SIZE_LABELS, COMPANY_DETAILS } from '../data/products';
 
@@ -258,7 +258,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   </>
                 ) : (
                   <>
-                    <ShoppingBag className="w-4 h-4" />
+                    <FileText className="w-4 h-4" />
                     <span>Add to Quotation</span>
                   </>
                 )}

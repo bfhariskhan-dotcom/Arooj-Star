@@ -10,7 +10,7 @@ export const TopMarquee: React.FC = () => {
   ];
 
   return (
-    <div className="bg-[#111827] text-white text-xs py-2.5 overflow-hidden border-b border-red-950/40 select-none">
+    <div className="bg-[#111827] text-white text-xs py-2.5 overflow-hidden border-b border-red-950/40 select-none w-full max-w-full">
       <div className="animate-marquee whitespace-nowrap flex items-center gap-10">
         {[...marqueeMessages, ...marqueeMessages, ...marqueeMessages].map((msg, i) => (
           <div key={i} className="flex items-center gap-3 shrink-0">

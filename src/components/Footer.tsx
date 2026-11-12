@@ -9,9 +9,9 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-slate-100 text-slate-800 border-t border-slate-200 pt-20 pb-12">
+    <footer className="bg-slate-100 text-slate-800 border-t border-slate-200 pt-12 pb-8 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 pb-10 border-b border-slate-200">
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo light={false} />
