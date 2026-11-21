@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, Eye, MessageSquare, Check } from 'lucide-react';
 import { Product, PackSizeKey } from '../types';
-import { PACK_SIZE_LABELS, COMPANY_DETAILS } from '../data/products';
+import { PACK_SIZE_LABELS, COMPANY_DETAILS, getPackSizeImage } from '../data/products';
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +12,7 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
-  onSelectProduct
+  onSelectProduct,
 }) => {
   const availableSizes = Object.keys(product.prices) as PackSizeKey[];
   const [selectedSize, setSelectedSize] = useState<PackSizeKey>(
@@ -21,6 +21,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [addedNotice, setAddedNotice] = useState(false);
 
   const currentPrice = product.prices[selectedSize] ?? Object.values(product.prices)[0] ?? 0;
+  const displayImage = getPackSizeImage(selectedSize, product.image);
+  const isCustomPhoto = Boolean(product.image && product.image.trim().length > 0);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -32,112 +34,119 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const handleWhatsApp = (e: React.MouseEvent) => {
     e.stopPropagation();
     const sizeName = PACK_SIZE_LABELS[selectedSize] || selectedSize;
-    const priceText = currentPrice.toLocaleString('en-PK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const priceText = currentPrice.toLocaleString('en-PK', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
     const text = encodeURIComponent(
-      `Hello Arooj Star, I am inquiring about:\n\nProduct: ${product.name} (Code: ${product.code})\nPack Size: ${sizeName}\nDealer Rate: Rs. ${priceText}\n\nPlease confirm stock and delivery timeline.`
+      `Hello Data Arooj Paint Gallery, inquiry for:\n\nProduct: ${product.name} (#${product.code})\nPack Size: ${sizeName}\nDealer Rate: Rs. ${priceText}`
     );
     window.open(`https://wa.me/${COMPANY_DETAILS.phone1Raw}?text=${text}`, '_blank');
   };
 
-  // Color palette for base code badges
   const isWB = product.baseCategoryCode === 'WB';
   const isOB = product.baseCategoryCode === 'OB';
+
+  const topAccentGradient = isWB
+    ? 'from-sky-500 via-blue-600 to-violet-600'
+    : isOB
+    ? 'from-rose-600 via-orange-500 to-amber-500'
+    : 'from-emerald-600 via-teal-500 to-sky-600';
 
   return (
     <div
       onClick={() => onSelectProduct(product)}
-      className="group relative flex flex-col bg-white rounded-2xl border border-slate-200 hover:border-[#c1121f] hover:shadow-xl hover:shadow-red-950/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
+      className="group relative flex flex-col bg-white rounded-lg border border-slate-200 hover:border-rose-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden cursor-pointer"
     >
-      {/* Signature Technical Badge Showcase Area (as requested by user) */}
-      <div className={`relative aspect-[16/10] overflow-hidden flex flex-col items-center justify-center p-5 text-center select-none ${
-        isWB
-          ? 'bg-gradient-to-br from-slate-950 via-zinc-900 to-black text-white'
-          : isOB
-          ? 'bg-gradient-to-br from-neutral-900 via-[#8B1E22] to-black text-white'
-          : 'bg-gradient-to-br from-zinc-950 via-stone-900 to-black text-white'
-      }`}>
-        {/* Subtle geometric grid background */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      {/* Top Spectrum Accent Line */}
+      <div className={`h-1 w-full bg-gradient-to-r ${topAccentGradient}`} />
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5">
-          <span className="text-[11px] font-mono font-bold bg-white/15 backdrop-blur-md text-white px-2.5 py-0.5 rounded-md border border-white/20">
+      {/* Paint Container Product Photo (Quarter / Gallon / Drum) or Custom Uploaded Image */}
+      <div className="relative aspect-[4/3] overflow-hidden flex items-center justify-center bg-gradient-to-b from-slate-50 to-white select-none">
+        <img
+          src={displayImage}
+          alt={product.name}
+          referrerPolicy="no-referrer"
+          className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+            isCustomPhoto ? 'object-cover object-center' : 'object-contain p-2 sm:p-3'
+          }`}
+        />
+
+        {/* Top Corner Badges */}
+        <div className="absolute top-2 left-2 z-10 flex items-center gap-1">
+          <span className="text-[10px] sm:text-[11px] font-heading font-bold bg-white/95 text-slate-900 px-1.5 sm:px-2 py-0.5 rounded border border-slate-200 shadow-xs tabular-nums">
             #{product.code}
           </span>
           {product.popular && (
-            <span className="text-[10px] font-bold bg-[#c1121f] text-white px-2 py-0.5 rounded-md tracking-wider uppercase">
+            <span className="hidden sm:inline-block text-[10px] font-bold bg-gradient-to-r from-rose-600 to-orange-500 text-white px-2 py-0.5 rounded uppercase shadow-xs">
               Popular
             </span>
           )}
         </div>
 
-        <div className="absolute top-3 right-3">
-          <span className="text-[10px] font-semibold bg-white/10 backdrop-blur-md text-slate-200 px-2 py-0.5 rounded-md border border-white/10">
+        <div className="hidden sm:block absolute top-2 right-2 z-10">
+          <span className="text-[10px] font-semibold bg-white/95 text-slate-700 px-2 py-0.5 rounded border border-slate-200">
             {product.finish}
           </span>
         </div>
 
-        {/* Center Iconic Chemical Base Monogram Badge (WB / OB / VR) */}
-        <div className="relative z-10 flex flex-col items-center">
-          <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:border-red-400 group-hover:shadow-red-500/20 transition-all duration-300">
-            <span className="text-xl font-black tracking-wider text-white">
-              {product.baseCategoryCode}
-            </span>
-          </div>
-
-          <span className="text-[11px] font-bold tracking-widest uppercase text-red-300 mt-2">
-            Arooj Star
-          </span>
-          <span className="text-[10px] text-slate-300 font-medium">
-            {product.baseType}
-          </span>
+        {/* Base Type Tag bottom-left */}
+        <div className="absolute bottom-1.5 left-2 z-10 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-slate-800 bg-white/90 px-1.5 py-0.5 rounded border border-slate-200">
+          <span className="text-rose-600 font-heading">{product.baseCategoryCode}</span>
+          <span className="hidden sm:inline" aria-hidden="true">·</span>
+          <span className="hidden sm:inline">{product.finish}</span>
         </div>
 
-        {/* Hover Action Overlay */}
-        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 z-20">
+        {/* Hover View Details Overlay */}
+        <div className="hidden sm:flex absolute inset-0 bg-white/55 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity items-center justify-center z-20">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onSelectProduct(product);
             }}
-            className="px-4 py-2 text-xs font-bold text-slate-900 bg-white hover:bg-slate-100 rounded-xl shadow-lg transition-transform flex items-center gap-1.5"
+            className="px-3.5 py-2 text-xs font-bold text-white bg-gradient-to-r from-rose-600 to-blue-600 rounded-md shadow-md flex items-center gap-1.5 cursor-pointer"
           >
-            <Eye className="w-3.5 h-3.5 text-[#c1121f]" />
+            <Eye className="w-3.5 h-3.5" />
             <span>View Details</span>
           </button>
         </div>
       </div>
 
-      {/* Content Body with Crisp Layout */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+      {/* Card Body - Responsive for 2-Column Mobile & 3-Column Desktop */}
+      <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
         <div>
-          {/* Metadata line */}
-          <div className="flex items-center gap-2 text-xs text-slate-400 font-medium mb-1.5">
-            <span className="text-[#c1121f] font-bold">{product.brand}</span>
-            <span aria-hidden="true">·</span>
-            <span>{product.categoryLabel}</span>
+          <div className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-500 font-medium mb-0.5">
+            <span className="text-rose-600 font-bold truncate">{product.brand}</span>
+            <span className="hidden sm:inline" aria-hidden="true">·</span>
+            <span className="hidden sm:inline truncate">{product.categoryLabel}</span>
           </div>
 
-          {/* Product Name */}
-          <h3 className="text-base font-bold text-slate-900 group-hover:text-[#c1121f] transition-colors line-clamp-1 mb-1.5 font-heading">
+          <h3 className="text-xs sm:text-base font-bold text-slate-900 group-hover:text-rose-600 transition-colors line-clamp-2 sm:line-clamp-1 mb-1 font-heading leading-snug">
             {product.name}
           </h3>
 
-          {/* Short description */}
-          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3.5 font-normal">
+          <p className="hidden sm:block text-xs text-slate-500 line-clamp-2 leading-relaxed mb-3">
             {product.shortDesc}
           </p>
 
-          {/* Pack Size Segmented Control */}
-          <div className="mb-5">
-            <div className="text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-2">
-              Pack Size
-            </div>
-            <div className="flex flex-wrap gap-1 p-1 bg-slate-100 rounded-xl">
+          {/* Pack Size Selector */}
+          <div className="mt-1.5 mb-2.5 sm:mb-4">
+            <div className="flex flex-wrap gap-1 p-1 bg-slate-100 rounded-md">
               {availableSizes.map((sizeKey) => {
                 const isSelected = selectedSize === sizeKey;
                 const shortLabel =
+                  sizeKey === 'smallTin'
+                    ? 'Small'
+                    : sizeKey === 'quarter'
+                    ? 'Qtr'
+                    : sizeKey === 'gallon'
+                    ? 'Gal'
+                    : sizeKey === 'drummy'
+                    ? 'Drum'
+                    : 'Brl';
+
+                const desktopLabel =
                   sizeKey === 'smallTin'
                     ? 'Small'
                     : sizeKey === 'quarter'
@@ -156,13 +165,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                       e.stopPropagation();
                       setSelectedSize(sizeKey);
                     }}
-                    className={`flex-1 min-w-[52px] py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap text-center cursor-pointer ${
+                    className={`flex-1 min-w-[34px] sm:min-w-[46px] py-1 text-[10px] sm:text-[11px] font-semibold rounded transition-all whitespace-nowrap text-center cursor-pointer ${
                       isSelected
-                        ? 'bg-white text-[#c1121f] shadow-xs font-bold'
+                        ? 'bg-white text-rose-600 shadow-xs font-bold'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    {shortLabel}
+                    <span className="sm:hidden">{shortLabel}</span>
+                    <span className="hidden sm:inline">{desktopLabel}</span>
                   </button>
                 );
               })}
@@ -170,46 +180,45 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Price & Action Row */}
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+        {/* Price & Action */}
+        <div className="pt-2 sm:pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-              Official Dealer Rate
+            <span className="hidden sm:block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              Dealer Rate
             </span>
-            <div className="text-lg font-black text-slate-900 font-mono tabular-nums leading-tight mt-0.5">
-              Rs. {currentPrice.toLocaleString('en-PK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            <div className="text-xs sm:text-lg font-black text-slate-900 font-heading tabular-nums leading-tight">
+              Rs. {currentPrice.toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             <button
               type="button"
               onClick={handleWhatsApp}
               title="Inquire on WhatsApp"
-              className="p-2.5 text-[#c1121f] hover:bg-red-50 border border-red-200 rounded-xl transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 text-emerald-700 hover:bg-emerald-50 border border-emerald-200 rounded-md transition-colors cursor-pointer shrink-0"
             >
-              <MessageSquare className="w-4 h-4" />
+              <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
 
             <button
               type="button"
               onClick={handleAdd}
-              className={`px-3.5 py-2.5 text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+              className={`flex-1 sm:flex-initial px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold rounded-md shadow-xs transition-all flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap ${
                 addedNotice
-                  ? 'bg-slate-900 text-white'
-                  : 'bg-[#c1121f] hover:bg-[#a50f1b] text-white active:scale-95'
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-gradient-to-r from-rose-600 to-orange-500 hover:opacity-95 text-white'
               }`}
-              title="Add to Dealer Quotation"
             >
               {addedNotice ? (
                 <>
-                  <Check className="w-3.5 h-3.5" />
+                  <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   <span>Added</span>
                 </>
               ) : (
                 <>
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>+ Quotation</span>
+                  <FileText className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  <span>+ Quote</span>
                 </>
               )}
             </button>

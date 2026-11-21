@@ -3,6 +3,7 @@ import { X, Trash2, FileText, MessageSquare, Check, ArrowRight, Printer, Buildin
 import confetti from 'canvas-confetti';
 import { CartItem, DealerOrderForm } from '../types';
 import { PACK_SIZE_LABELS, COMPANY_DETAILS } from '../data/products';
+import { createQuotationInFirestore } from '../lib/storeService';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       : '';
 
     const message = encodeURIComponent(
-      `*Arooj Star Forever Paint - Official Order Inquiry*\n` +
+      `*Arooj Star - Official Order Inquiry*\n` +
       `*Data Arooj Paint Gallery*\n` +
       `--------------------------------------\n\n` +
       `${orderList}\n\n` +
@@ -82,6 +83,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     const orderNum = `ASP-${Math.floor(100000 + Math.random() * 900000)}`;
     setSubmittedOrderNumber(orderNum);
     setActiveTab('success');
+
+    createQuotationInFirestore({
+      orderNumber: orderNum,
+      source: 'quotation_drawer',
+      fullName: formData.fullName,
+      companyShopName: formData.companyShopName,
+      phone: formData.phone,
+      city: formData.city,
+      province: formData.province,
+      deliveryAddress: formData.deliveryAddress,
+      orderNotes: formData.orderNotes || '',
+      items: items.map((it) => ({
+        productId: it.product.id,
+        code: it.product.code,
+        name: it.product.name,
+        selectedSize: it.selectedSize,
+        quantity: it.quantity,
+        unitPrice: it.unitPrice,
+        subtotal: it.unitPrice * it.quantity,
+      })),
+      totalAmount,
+    });
 
     try {
       confetti({
@@ -181,7 +204,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                          <span className="font-mono font-bold text-[#c1121f]">#{item.product.code}</span>
+                          <span className="font-heading tabular-nums font-bold text-[#c1121f]">#{item.product.code}</span>
                           <span aria-hidden="true">·</span>
                           <span>{item.product.brand}</span>
                         </div>
@@ -211,7 +234,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         >
                           -
                         </button>
-                        <span className="px-3 py-1 text-xs font-semibold font-mono tabular-nums bg-white min-w-[28px] text-center">
+                        <span className="px-3 py-1 text-xs font-semibold font-heading tabular-nums bg-white min-w-[28px] text-center">
                           {item.quantity}
                         </span>
                         <button
@@ -224,7 +247,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                       <div className="text-right">
                         <span className="text-[10px] text-slate-400 block">Subtotal</span>
-                        <span className="text-sm font-bold text-slate-900 font-mono tabular-nums">
+                        <span className="text-sm font-bold text-slate-900 font-heading tabular-nums">
                           Rs. {(item.unitPrice * item.quantity).toLocaleString('en-PK', { minimumFractionDigits: 2 })}
                         </span>
                       </div>
@@ -367,7 +390,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <h4 className="text-lg font-bold text-slate-900 mb-1">
                   Quotation Confirmed!
                 </h4>
-                <div className="text-xs font-mono font-bold text-[#c1121f] bg-red-50 py-1.5 px-3 rounded inline-block mb-3 border border-red-100">
+                <div className="text-xs font-heading tabular-nums font-bold text-[#c1121f] bg-red-50 py-1.5 px-3 rounded inline-block mb-3 border border-red-100">
                   Reference: #{submittedOrderNumber}
                 </div>
                 <p className="text-xs text-slate-600 max-w-xs mx-auto mb-6 leading-relaxed">
@@ -385,7 +408,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   </div>
                   <div className="flex justify-between pt-2 border-t border-slate-200 font-bold">
                     <span className="text-slate-700">Estimated Total:</span>
-                    <span className="text-slate-900 font-mono">Rs. {totalAmount.toLocaleString('en-PK', { minimumFractionDigits: 2 })}</span>
+                    <span className="text-slate-900 font-heading tabular-nums">Rs. {totalAmount.toLocaleString('en-PK', { minimumFractionDigits: 2 })}</span>
                   </div>
                 </div>
 
@@ -426,7 +449,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="p-6 bg-slate-50 border-t border-slate-200 space-y-3">
               <div className="flex items-center justify-between text-xs text-slate-600">
                 <span>Subtotal ({items.length} items):</span>
-                <span className="font-mono font-semibold text-slate-900">
+                <span className="font-heading tabular-nums font-semibold text-slate-900">
                   Rs. {totalAmount.toLocaleString('en-PK', { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -436,7 +459,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
               <div className="flex items-center justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
                 <span>Total Dealer Rate:</span>
-                <span className="text-lg font-mono text-[#c1121f] tabular-nums font-black">
+                <span className="text-lg font-heading tabular-nums text-[#c1121f] tabular-nums font-black">
                   Rs. {totalAmount.toLocaleString('en-PK', { minimumFractionDigits: 2 })}
                 </span>
               </div>

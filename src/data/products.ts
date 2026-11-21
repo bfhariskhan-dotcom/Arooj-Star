@@ -1,7 +1,7 @@
 import { Product } from '../types';
 
 export const COMPANY_DETAILS = {
-  brandName: 'Arooj Star Forever Paint',
+  brandName: 'Data Arooj Paint Gallery',
   galleryName: 'Data Arooj Paint Gallery',
   parentIndustry: 'Asuzas Paint Chemical Industries',
   taglineEnglish: 'Superior Quality Paints for Beautiful & Protected Homes',
@@ -11,9 +11,20 @@ export const COMPANY_DETAILS = {
   phone1Raw: '923019736709',
   phone2: '0346-4467194',
   phone2Raw: '923464467194',
+  email: 'info@dataaroojpaintgallery.shop',
+  website: 'https://dataaroojpaintgallery.shop',
+  domain: 'dataaroojpaintgallery.shop',
   regions: 'Nationwide Delivery Across All Pakistan (Punjab, Sindh, KPK, Balochistan, Gilgit-Baltistan & AJK)',
   priceListDate: 'Effective April 15, 2026',
   address: 'Data Arooj Paint Gallery, Main Industrial Paint Market, Pakistan',
+  heroImage: '/src/assets/images/hero_paint_luxury_interior_1794226083963.jpg',
+  aboutImage: 'https://i.postimg.cc/DwrXBmG0/Whats-App-Image-2026-11-09-at-9-15-38-AM.jpg',
+  socialLinks: [
+    { id: 'soc-fb', platform: 'facebook' as const, label: 'Facebook', url: '#', enabled: true },
+    { id: 'soc-ig', platform: 'instagram' as const, label: 'Instagram', url: '#', enabled: true },
+    { id: 'soc-tt', platform: 'tiktok' as const, label: 'TikTok', url: '#', enabled: true },
+    { id: 'soc-yt', platform: 'youtube' as const, label: 'YouTube', url: '#', enabled: true },
+  ],
   videos: [
     {
       id: 'vid-1',
@@ -102,6 +113,24 @@ export const PACK_SIZE_LABELS: Record<string, string> = {
   gallon: 'Gallon (3.64 L)',
   drummy: 'Drummy (14.56 L)',
   barrel: 'Industrial Barrel (200 L)'
+};
+
+export const PACK_SIZE_IMAGES: Record<string, string> = {
+  smallTin: '/src/assets/images/paint_pack_quarter_1795296527670.jpg',
+  quarter: '/src/assets/images/paint_pack_quarter_1795296527670.jpg',
+  gallon: '/src/assets/images/paint_pack_gallon_1795296527912.jpg',
+  drummy: '/src/assets/images/paint_pack_drum_1795296527782.jpg',
+  barrel: '/src/assets/images/paint_pack_drum_1795296527782.jpg',
+};
+
+export const getPackSizeImage = (sizeKey?: string, customImage?: string): string => {
+  if (customImage && customImage.trim().length > 0) {
+    return customImage;
+  }
+  if (sizeKey && PACK_SIZE_IMAGES[sizeKey]) {
+    return PACK_SIZE_IMAGES[sizeKey];
+  }
+  return PACK_SIZE_IMAGES.gallon;
 };
 
 export const POPULAR_SHADES = [

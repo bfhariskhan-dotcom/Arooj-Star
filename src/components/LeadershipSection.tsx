@@ -65,7 +65,7 @@ export const LeadershipSection: React.FC = () => {
               <div className="space-y-2.5 text-xs text-slate-300 mb-6 bg-white/5 p-4 rounded-xl border border-white/10">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Direct Contact:</span>
-                  <span className="font-mono font-bold text-white text-sm">{COMPANY_DETAILS.phone1}</span>
+                  <span className="font-heading tabular-nums font-bold text-white text-sm">{COMPANY_DETAILS.phone1}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Distribution:</span>
@@ -122,7 +122,7 @@ export const LeadershipSection: React.FC = () => {
               <div className="space-y-2.5 text-xs text-slate-600 mb-6 bg-white p-4 rounded-xl border border-slate-200">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500">Hotline Number:</span>
-                  <span className="font-mono font-bold text-slate-900 text-sm">{COMPANY_DETAILS.phone2}</span>
+                  <span className="font-heading tabular-nums font-bold text-slate-900 text-sm">{COMPANY_DETAILS.phone2}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500">Dispatch Logistics:</span>
